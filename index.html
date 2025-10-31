@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Resgatar Key</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+  .tab { padding: 10px 20px; border: 1px solid #333; cursor: pointer; }
+  .tab.active { background-color: #333; color: white; }
+  .content { display: none; }
+  .content.active { display: block; }
+  button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  input { padding: 8px; font-size: 16px; width: 250px; }
+  #key-display { margin-top: 20px; font-weight: bold; font-size: 18px; color: green; }
+  #error { color: red; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <div class="tab active" data-tab="tab1">Home</div>
+  <div class="tab" data-tab="tab2">Resgatar Key</div>
+</div>
+
+<div class="content active" id="tab1">
+  <h2>Bem-vindo!</h2>
+  <p>Use a aba "Resgatar Key" para digitar sua key.</p>
+</div>
+
+<div class="content" id="tab2">
+  <h2>Resgatar Key</h2>
+  <input type="text" id="inputKey" placeholder="Digite sua key aqui">
+  <button onclick="validarKey()">Resgatar Key</button>
+  <div id="key-display"></div>
+  <div id="error"></div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const contents = document.querySelectorAll('.content');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Lista de keys válidas (exemplo)
+const validKeys = [
+  "4F7A9-1KZ3B-8M2PQ-WX5RT",
+  "BD92K-7LQ3V-5Z8MN-GT1HY",
+  "Q1W3E-R5T7Y-U9I0O-P2A4S",
+  "Z8X7C-6V5B4-N3M2L-K1J0H",
+  "P9O8I-U7Y6T-R5E4W-Q3S2D"
+];
+
+function validarKey() {
+  const userKey = document.getElementById('inputKey').value.trim();
+  const display = document.getElementById('key-display');
+  const error = document.getElementById('error');
+  display.innerText = "";
+  error.innerText = "";
+
+  if (validKeys.includes(userKey)) {
+    display.innerText = "RISGATA KEY: " + userKey + " resgatada com sucesso!";
+  } else {
+    error.innerText = "Key inválida. Tente novamente.";
+  }
+}
+</script>
+
+</body>
+</html>
